@@ -1,0 +1,34 @@
+This repository is a copy of hikari's dsv4-flash-nvfp4-sm120 kit with additions.
+
+Original kit
+  Author:  hikari (github.com/hikarioyama)
+  Source:  https://github.com/hikarioyama/dsv4-flash-nvfp4-sm120
+  Licence: MIT, Copyright (c) 2026 hikari (kept in LICENSE)
+  Covers:  the README above its Credits and Variants sections, docs/, serve.sh, serve-mtp.sh,
+           serve_b12x_tp2.sh, b12x_inner.sh, mtp_*.sh, mtp_stream.py, run_mtp_on.sh, run_mtp_off.sh,
+           bench_mtp.py, bench_throughput.sh, ready.sh, smoke.sh, stop.sh, and the changes in
+           patches/nvfp4.py and patches/quant_config.py.
+
+DSpark serving script
+  Author:  Fraser Price (huggingface.co/fraserprice, x.com/fraserpricee)
+  Source:  run.sh in https://huggingface.co/fraserprice/DeepSeek-V4-Flash-DSpark
+  Licence: MIT, as published with that repository
+  Covers:  fraserprice_run.sh (unchanged). The four fraserprice_*_*.sh variants are modified copies.
+
+vLLM source files
+  Source:  https://github.com/vllm-project/vllm
+  Licence: Apache License 2.0, Copyright contributors to the vLLM project (patches/LICENSE-vLLM)
+  Covers:  patches/nvfp4.py, patches/quant_config.py, patches/workspace.py and patches/workspace_r19.py are
+           modified copies of vLLM source files. Each keeps its SPDX licence header. nvfp4.py and
+           quant_config.py were modified by hikari; workspace.py and workspace_r19.py by Seth Pratt's lab.
+
+Docker images (referenced, not redistributed)
+  The voipmonitor/vllm images used by the scripts are builds from local-inference-lab/rtx6kpro
+  (https://github.com/local-inference-lab/rtx6kpro), published at https://hub.docker.com/r/voipmonitor/vllm.
+
+Changes and additions by Seth Pratt's lab (MIT, Copyright (c) 2026 Seth Pratt)
+  English translations of the Japanese comments and messages in serve.sh, serve-mtp.sh, mtp_accept.sh,
+  ready.sh and smoke.sh; fraserprice_run_thinking.sh, fraserprice_nop2p.sh, fraserprice_nop2p_scribe.sh and
+  fraserprice_run_thinking_nop2p.sh; serve_r19_tp2.sh, r19_inner.sh, serve_r19_fp8.sh and r19_fp8_inner.sh;
+  the changes in patches/workspace.py and patches/workspace_r19.py; agent_ladder.py; and the README's
+  Credits and Variants sections.

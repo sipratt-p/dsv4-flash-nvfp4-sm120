@@ -26,6 +26,32 @@ complete debugging log (Acts 1–7).
 > before the fix. Two serving paths are provided: a MARLIN path (`serve.sh`,
 > no MTP) and a B12X native path (`serve_b12x_tp2.sh`, **MTP working**).
 
+## Credits
+
+This kit is **hikari's work** ([@hikarioyama](https://github.com/hikarioyama)), first published as
+[hikarioyama/dsv4-flash-nvfp4-sm120](https://github.com/hikarioyama/dsv4-flash-nvfp4-sm120) under MIT. That
+includes the serving scripts, the MTP root-cause fix and its debugging log
+([`docs/MTP_INVESTIGATION.md`](docs/MTP_INVESTIGATION.md)), the 1M-context finding
+([`docs/CONTEXT_LENGTH.md`](docs/CONTEXT_LENGTH.md)), and every measurement in this README above the Variants
+section (108.8 to 150.6 t/s, +38%, and the 1.9M-token KV pool), which hikari measured. The README text above
+and below is hikari's, apart from this section, the Variants section and the licence note.
+
+- **DSpark serving script:** `fraserprice_run.sh` is Fraser Price's `run.sh` from
+  [fraserprice/DeepSeek-V4-Flash-DSpark](https://huggingface.co/fraserprice/DeepSeek-V4-Flash-DSpark) (MIT),
+  unchanged. By [Fraser Price](https://x.com/fraserpricee).
+- **vLLM builds:** the `voipmonitor/vllm` images the scripts use are built by
+  [local-inference-lab/rtx6kpro](https://github.com/local-inference-lab/rtx6kpro).
+- **vLLM:** the files in `patches/` are modified copies of [vLLM](https://github.com/vllm-project/vllm) source
+  files (Apache-2.0); see [`patches/LICENSE-vLLM`](patches/LICENSE-vLLM).
+
+**What my lab added** (my lab: a team of AI agents I direct): English translations of the Japanese comments;
+the four variants of Fraser Price's script (thinking template on, cross-GPU P2P off, a small-workload
+tuning); the `r19` launchers; the workspace patches (`patches/workspace.py`, `patches/workspace_r19.py`);
+`agent_ladder.py`; and the Variants table below. Our own measurements with these scripts (FP8 with DSpark at
+182 to 186 t/s single-stream on two RTX PRO 6000) are in
+[blackwell-serving-kit](https://github.com/sipratt-p/blackwell-serving-kit), not in this README. File-by-file
+attribution is in [`NOTICE`](NOTICE).
+
 ## Status
 
 | Path | State |
@@ -218,13 +244,13 @@ Raw streamed runs: [`docs/bench_mtp_on.jsonl`](docs/bench_mtp_on.jsonl) /
 
 ## License
 
-MIT — see [`LICENSE`](LICENSE).
+MIT, Copyright (c) 2026 hikari and Copyright (c) 2026 Seth Pratt for the changes and additions; see
+[`LICENSE`](LICENSE) and [`NOTICE`](NOTICE).
 
-This repo contains only scripts and documentation. It does **not** redistribute
-the model weights or the vLLM/NVIDIA source; those remain under their own
-licenses. The patches under `patches/` are small mount-overlay shims; the
-debugging doc describes how to instrument a local install but does not copy
-upstream code.
+This repo does **not** redistribute the model weights. The four files under `patches/` are modified copies of
+vLLM source files, mounted over a local install; they keep vLLM's Apache-2.0 licence headers, and the licence
+text is in [`patches/LICENSE-vLLM`](patches/LICENSE-vLLM). The debugging doc describes how to instrument a
+local install but does not copy upstream code.
 
 ## Variants and experiments (committed as-is)
 
